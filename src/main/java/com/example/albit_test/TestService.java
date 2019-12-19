@@ -54,34 +54,83 @@ public class TestService {
 
     public List<Albit> readExcelFile() throws IOException {
         List<Albit> list = new ArrayList<>();
-        String filePath = "C:\\Users\\HANGYEOL\\Desktop\\springboot_excel_parse\\src\\main\\resources\\static\\bbbb.xlsx";
+        String filePath = "C:\\Users\\HANGYEOL\\Desktop\\springboot_excel_parse\\src\\main\\resources\\static\\albit_sample_data.xlsx";
         FileInputStream inputStream = new FileInputStream(filePath);
 
         Workbook testWorkbook = WorkbookFactory.create(inputStream);
         Sheet firstSheet = testWorkbook.getSheetAt(0);
 
-        Iterator<Row> iterator = firstSheet.iterator();
+        Iterator<Row> rowIterator = firstSheet.iterator();
 
-        while (iterator.hasNext()) {
-            Row nextRow = iterator.next();
-            Iterator<Cell> cellIterator = nextRow.cellIterator();
+        while (rowIterator.hasNext()) {
             Albit albit = new Albit();
+            Row nextRow = rowIterator.next();
+            // 첫 번째 행이 헤더인 경우 스킵, 2번째 행부터 data 로드
+            if (nextRow.getRowNum() <= 1) {
+                continue;
+            }
+
+            Iterator<Cell> cellIterator = nextRow.cellIterator();
 
             while (cellIterator.hasNext()) {
                 Cell nextCell = cellIterator.next();
                 int columnIndex = nextCell.getColumnIndex();
-                // Integer.parseInt
-                // String.valueOf
+
                 switch (columnIndex) {
                     case 0:
-                        albit.setName((String) getCellValue(nextCell));
+                        Double periodValue = ((Double) getCellValue(nextCell));
+                        if (periodValue.toString().equals("-")) {
+                            periodValue = (double) 0;
+                        }
+                        albit.setPeriod(periodValue.intValue());
                         break;
                     case 1:
-                        albit.setBirthDate((String) getCellValue(nextCell));
+                        Double usingRateValue = ((Double) getCellValue(nextCell));
+                        if (usingRateValue.toString().equals("-")) {
+                            usingRateValue = (double) 0;
+                        }
+                        albit.setUsing_rate(usingRateValue);
                         break;
-//                    case 3:
-//                        albit.setId((int) getCellValue(nextCell));
-//                        break;
+                    case 2:
+                        Double smartPhoneValue = ((Double) getCellValue(nextCell));
+                        if (smartPhoneValue.toString().equals("-")) {
+                            smartPhoneValue = (double) 0;
+                        }
+                        albit.setSmart_phone(smartPhoneValue);
+                        break;
+                    case 3:
+                        Double desktopComputerValue = ((Double) getCellValue(nextCell));
+                        if (desktopComputerValue.toString().equals("-")) {
+                            desktopComputerValue = (double) 0;
+                        }
+                        albit.setDesktop_computer(desktopComputerValue);
+                        break;
+                    case 4:
+                        Double notebookComputerValue = ((Double) getCellValue(nextCell));
+                        if (notebookComputerValue.toString().equals("-")) {
+                            notebookComputerValue = (double) 0;
+                        }
+                        albit.setNotebook_computer(notebookComputerValue);
+                        break;
+                    case 5:
+                        Double etcValue = ((Double) getCellValue(nextCell));
+                        if (etcValue.toString().equals("-")) {
+                            etcValue = (double) 0;
+                        }
+                        albit.setEtc(etcValue);
+                        break;
+                    case 6:
+                        String smartPadValue = String.valueOf(getCellValue(nextCell));
+                        Double returnValue = 0.0;
+                        if (smartPadValue.equals("-")) {
+                            smartPadValue = String.valueOf(0.0);
+                            returnValue = Double.valueOf(smartPadValue);
+                            System.out.println(smartPadValue);
+                        }
+
+                        albit.setSmart_pad(Double.valueOf(smartPadValue));
+                        break;
+
                 }
             }
             list.add(albit);

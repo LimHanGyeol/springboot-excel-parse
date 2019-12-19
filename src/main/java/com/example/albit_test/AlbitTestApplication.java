@@ -14,6 +14,7 @@ public class AlbitTestApplication {
 		SpringApplication.run(AlbitTestApplication.class, args);
         TestService testService = new TestService();
 		try {
+            //testService.excelImport();
             List<Albit> list = testService.readExcelFile();
             System.out.println(list);
         } catch (Exception e) {

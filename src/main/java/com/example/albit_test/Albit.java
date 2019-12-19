@@ -1,35 +1,22 @@
 package com.example.albit_test;
 
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class Albit {
 
-    String name;
-    String birthDate;
+    double id;
+    int period;
+    double using_rate;
+    double smart_phone;
+    double desktop_computer;
+    double notebook_computer;
+    double etc;
+    double smart_pad;
 
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Albit{" +
-                "name='" + name + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                '}';
-    }
 }

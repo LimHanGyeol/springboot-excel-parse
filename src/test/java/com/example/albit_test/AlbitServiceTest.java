@@ -14,9 +14,6 @@ class AlbitServiceTest {
 
     @Autowired
     AlbitService albitService;
-    @Test
-    public void indexValidTest() {
-        assertNotNull(albitService.indexValid("-"));
-    }
+
 
 }

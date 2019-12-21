@@ -1,7 +1,7 @@
 package com.example.albit_test.service;
 
-import com.example.albit_test.repository.AlbitRepository;
-import com.example.albit_test.model.Albit;
+import com.example.albit_test.repository.StatisticsRepository;
+import com.example.albit_test.model.Statistics;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,21 +14,21 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class AlbitCreateService  implements CommandLineRunner {
+public class StatisticsCreateService implements CommandLineRunner {
 
-    private String smartPadValue, etcValue, notebookComputerValue, desktopComputerValue, smartPhoneValue, usingRateValue;
     private Double periodValue;
-    private List<Albit> list;
+    private String usingRateValue, smartPhoneValue, desktopComputerValue, notebookComputerValue, etcValue, smartPadValue;
+    private List<Statistics> list;
 
     @Autowired
-    private AlbitRepository albitRepository;
+    private StatisticsRepository statisticsRepository;
 
     @Override
     public void run(String... args) throws Exception {
         readExcelFile();
     }
 
-    public List<Albit> readExcelFile() throws IOException {
+    public List<Statistics> readExcelFile() throws IOException {
         list = new ArrayList<>();
         String filePath = "C:\\Users\\HANGYEOL\\Desktop\\springboot_excel_parse\\src\\main\\resources\\static\\albit_sample_data.xlsx";
         FileInputStream inputStream = new FileInputStream(filePath);
@@ -55,7 +55,7 @@ public class AlbitCreateService  implements CommandLineRunner {
         return null;
     }
 
-    private Double indexDataVaild(String value) {
+    public Double indexDataVaild(String value) {
         if (value.equals("-")) {
             value = String.valueOf(0.0);
         }
@@ -70,9 +70,9 @@ public class AlbitCreateService  implements CommandLineRunner {
             }
             Iterator<Cell> cellIterator = nextRow.cellIterator();
             getCellData(cellIterator);
-            Albit albit = new Albit(periodValue.intValue(), indexDataVaild(usingRateValue), indexDataVaild(smartPhoneValue), indexDataVaild(desktopComputerValue), indexDataVaild(notebookComputerValue), indexDataVaild(etcValue), indexDataVaild(smartPadValue));
-            list.add(albit);
-            albitRepository.save(albit);
+            Statistics statistics = new Statistics(periodValue.intValue(), indexDataVaild(usingRateValue), indexDataVaild(smartPhoneValue), indexDataVaild(desktopComputerValue), indexDataVaild(notebookComputerValue), indexDataVaild(etcValue), indexDataVaild(smartPadValue));
+            list.add(statistics);
+            statisticsRepository.save(statistics);
         }
     }
 

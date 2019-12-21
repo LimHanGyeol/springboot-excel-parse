@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Table(name = "albit_data")
-public class Albit {
+public class Statistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,33 +22,33 @@ public class Albit {
     private int period;
 
     @Column(name = "using_rate")
-    private double using_rate;
+    private double usingRate;
 
     @Column(name = "smart_phone")
-    private double smart_phone;
+    private double smartPhone;
 
     @Column(name = "desktop_computer")
-    private double desktop_computer;
+    private double desktopComputer;
 
     @Column(name = "notebook_computer")
-    private double notebook_computer;
+    private double notebookComputer;
 
     @Column(name = "etc")
     private double etc;
 
     @Column(name = "smart_pad")
-    private double smart_pad;
+    private double smartPad;
 
-    public Albit() {
+    public Statistics() {
     }
 
-    public Albit(int period, double using_rate, double smart_phone, double desktop_computer, double notebook_computer, double etc, double smart_pad) {
+    public Statistics(int period, double usingRate, double smartPhone, double desktopComputer, double notebookComputer, double etc, double smartPad) {
         this.period = period;
-        this.using_rate = using_rate;
-        this.smart_phone = smart_phone;
-        this.desktop_computer = desktop_computer;
-        this.notebook_computer = notebook_computer;
+        this.usingRate = usingRate;
+        this.smartPhone = smartPhone;
+        this.desktopComputer = desktopComputer;
+        this.notebookComputer = notebookComputer;
         this.etc = etc;
-        this.smart_pad = smart_pad;
+        this.smartPad = smartPad;
     }
 }

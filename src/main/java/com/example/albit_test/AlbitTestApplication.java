@@ -1,27 +1,23 @@
 package com.example.albit_test;
 
-import com.example.albit_test.model.Albit;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.List;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class AlbitTestApplication {
 
-
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(AlbitTestApplication.class, args);
-//        TestService testService = new TestService();
-//		try {
-//            //testService.excelImport();
-//            List<Albit> list = testService.readExcelFile();
-//            System.out.println(list);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+	}
+
+	/**
+	 * Model Mapper
+	 */
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
 	}
 
 }

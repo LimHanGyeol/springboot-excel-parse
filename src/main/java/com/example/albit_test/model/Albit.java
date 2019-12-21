@@ -16,28 +16,31 @@ public class Albit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    int id;
+    private int id;
 
     @Column(name = "period")
-    int period;
+    private int period;
 
     @Column(name = "using_rate")
-    double using_rate;
+    private double using_rate;
 
     @Column(name = "smart_phone")
-    double smart_phone;
+    private double smart_phone;
 
     @Column(name = "desktop_computer")
-    double desktop_computer;
+    private double desktop_computer;
 
     @Column(name = "notebook_computer")
-    double notebook_computer;
+    private double notebook_computer;
 
     @Column(name = "etc")
-    double etc;
+    private double etc;
 
     @Column(name = "smart_pad")
-    double smart_pad;
+    private double smart_pad;
+
+    public Albit() {
+    }
 
     public Albit(int period, double using_rate, double smart_phone, double desktop_computer, double notebook_computer, double etc, double smart_pad) {
         this.period = period;

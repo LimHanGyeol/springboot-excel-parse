@@ -30,10 +30,11 @@ dependencies {
     compile group: 'org.apache.poi', name: 'poi', version: '4.1.1'
     // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
     compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.1'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     // Maria db
     implementation 'org.mariadb.jdbc:mariadb-java-client'
-    
+    // ModelMapper
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.5'
+
 }
 
 test {

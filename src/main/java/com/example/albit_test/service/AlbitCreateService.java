@@ -1,8 +1,10 @@
-package com.example.albit_test;
+package com.example.albit_test.service;
 
+import com.example.albit_test.repository.AlbitRepository;
 import com.example.albit_test.model.Albit;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
@@ -12,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Service
-public class AlbitService {
+public class AlbitCreateService  implements CommandLineRunner {
 
     private String smartPadValue, etcValue, notebookComputerValue, desktopComputerValue, smartPhoneValue, usingRateValue;
     private Double periodValue;
@@ -20,6 +22,11 @@ public class AlbitService {
 
     @Autowired
     private AlbitRepository albitRepository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        readExcelFile();
+    }
 
     public List<Albit> readExcelFile() throws IOException {
         list = new ArrayList<>();
@@ -79,28 +86,28 @@ public class AlbitService {
 
     private void getCellDataParse(int columnIndex, Cell nextCell) {
         switch (columnIndex) {
-            case 0:
+            case 0: // 조사 기간
                 periodValue = ((Double) getCellValue(nextCell));
                 if (periodValue.toString().equals("-")) {
                     periodValue = (double) 0;
                 }
                 break;
-            case 1:
+            case 1: // 이용률
                 usingRateValue = String.valueOf(getCellValue(nextCell));
                 break;
-            case 2:
+            case 2: // 스마트폰 통계
                 smartPhoneValue = String.valueOf(getCellValue(nextCell));
                 break;
-            case 3:
+            case 3: // 데스크탑 컴퓨터 통계
                 desktopComputerValue = String.valueOf(getCellValue(nextCell));
                 break;
-            case 4:
+            case 4: // 노트북 통계
                 notebookComputerValue = String.valueOf(getCellValue(nextCell));
                 break;
-            case 5:
+            case 5: // 기타 통계
                 etcValue = String.valueOf(getCellValue(nextCell));
                 break;
-            case 6:
+            case 6: // 스마트 패드 통계
                 smartPadValue = String.valueOf(getCellValue(nextCell));
                 break;
         }
